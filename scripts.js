@@ -9,11 +9,14 @@ $(document).ready(function(){
             totaldiv.text("Err");
         }else if (!isNaN(number)){
             totaldiv.text(number);
+            valueContainer(number);
         }
     };
     var number = "";
     var newnumber = "";
     var operator = "";
+    var counter = 0;
+    var HistoryVal = "";
     var totaldiv = $("#total");
     totaldiv.text("0");
     $("#numbers a").not("#clear,#clearall").click(function(){
@@ -39,6 +42,7 @@ $(document).ready(function(){
         totaldiv.text("0");
         if ($(this).attr("id") === "clearall") {
             newnumber = "";
+
         }
     });
     $("#decimal").click(function(){
@@ -50,17 +54,18 @@ $(document).ready(function(){
         }
         if (numOfDecs > 0) {
             number = number;
-            number = round(number,9);
+            number = math.round(number,9);
             totaldiv.text(number);
         } else {
             number += ".";
-            number = round(number,9);
+            number = math.round(number,9);
             totaldiv.text(number);
         }
         testNumLength(number);
     });
 
     $("#equals").click(function(){
+        curnumber = number
         if (operator === "+"){
             number = (parseFloat(number, 9) + parseFloat(newnumber,9)).toString(9);
         } else if (operator === "-"){
@@ -75,22 +80,35 @@ $(document).ready(function(){
         }else if  (operator === "^"){
             number = Math.pow(number,newnumber)
         }
+        HistoryVal = curnumber + operator + newnumber +"=" +  number
         totaldiv.text(number);
         testNumLength(number);
+        valueContainer(HistoryVal);
         number = "";
         newnumber = "";
     });
     var valueContainer = function(value){
-        num = value
-        nwnum = num
-        num = ""
-        counter = 0
-        if(counter == 0){
-            console.log("max number in storage has been reached")
+        num = value.toString(9)
+        
+        var hHis = $("#History");
+        var allcal = new Array();
+        counter += 1
+        if (operator != ""){
+            allcal[counter] = num
         }
-        $("#storedValues").Click(function(){
-
-        });   
+        
+        console.log(counter);
+      if (counter <= 10) {
+        for (var i = allcal.length - 1; i >= 0; i--) {
+            hHis.text(allcal[i]);
+              if (i >= 10){
+                hHis.text("");
+            }
+        }if (num = "") {
+            hHis.text("History has been cleared");
+            counter = 0
+        }
+    }       
 }
 
 });

@@ -82,7 +82,15 @@ a#equals {
 	padding-top: 50px;
 	height: 100px;
 }
-#storage {
-	padding-top: 50px;
-	height: 100px;	
+#History {
+	background-color: #F0F8FF;
+	width: 310px;
+	height: 100px;
+	border: 3px black solid;
+	margin: 10px auto;
+	padding: 5px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
 }
