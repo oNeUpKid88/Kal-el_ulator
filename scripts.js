@@ -1,12 +1,20 @@
 $(document).ready(function(){
     var testNumLength = function(number) {
-        if (number.length > 9) {
-            totaldiv.text(number.substr(number.length-9,9));
-            if (number.length > 15) {
+        totaldiv.text("0");
+        var numStr = number.toString
+        var StrLen = numStr.Length
+        if (isNaN(number) || number.length >= 9) {
                 number = "";
                 totaldiv.text("Err");
-            }
-        } 
+            }else if (!isNaN(number)){
+                if (StrLen >= 9){
+                    console.log("entered");
+                    totaldiv.text("Err");
+                }else{
+                    console.log("bypassed" + StrLen);
+                    totaldiv.text(number);        
+            }   
+        }
     };
     var number = "";
     var newnumber = "";
@@ -19,7 +27,8 @@ $(document).ready(function(){
         testNumLength(number);
     });
     $("#operators a,#side a").not("#equals, #decimal").click(function(){
-        if ($(this).text() === "sqrt"){
+
+        if ($(this).text() === "sqrt" || $(this).text() === "√"){
             operator = "sqrt";
             $("#equals").click();
             return;
@@ -27,8 +36,9 @@ $(document).ready(function(){
         operator = $(this).text();
         newnumber = number;
         number = "";
-        totaldiv.text("0");
+        //totaldiv.text("0");
     });
+
     $("#clear,#clearall").click(function(){
         number = "";
         totaldiv.text("0");
@@ -54,18 +64,18 @@ $(document).ready(function(){
         }
         testNumLength(number);
     });
-    //Add your last .click() here!
+
     $("#equals").click(function(){
         if (operator === "+"){
-            number = (parseFloat(number, 10) + parseFloat(newnumber,10)).toString(10);
+            number = (parseFloat(number, 9) + parseFloat(newnumber,9)).toString(9);
         } else if (operator === "-"){
-            number = (parseFloat(newnumber, 10) - parseFloat(number,10)).toString(10);
+            number = (parseFloat(newnumber, 9) - parseFloat(number,9)).toString(9);
         } else if (operator === "÷"){
-            number = (parseFloat(newnumber, 10) / parseFloat(number,10)).toString(10);
+            number = (parseFloat(newnumber, 9) / parseFloat(number,9)).toString(9);
         } else if (operator === "×"){
-            number = (parseFloat(newnumber, 10) * parseFloat(number,10)).toString(10);
+            number = (parseFloat(newnumber, 9) * parseFloat(number,9)).toString(9);
         } else if (operator === "sqrt"){
-            number = Math.sqrt(parseFloat(number,10).toString(10))
+            number = Math.sqrt(parseFloat(number,8).toString(8));
         }else if  (operator === "^"){
             number = Math.pow(number,newnumber)
         }
