@@ -1,19 +1,14 @@
 $(document).ready(function(){
     var testNumLength = function(number) {
         totaldiv.text("0");
-        var numStr = number.toString
-        var StrLen = numStr.Length
-        if (isNaN(number) || number.length >= 9) {
-                number = "";
-                totaldiv.text("Err");
-            }else if (!isNaN(number)){
-                if (StrLen >= 9){
-                    console.log("entered");
-                    totaldiv.text("Err");
-                }else{
-                    console.log("bypassed" + StrLen);
-                    totaldiv.text(number);        
-            }   
+        var numToString = number.toString()
+        var StringLen = numToString.length
+
+        if (isNaN(number) || StringLen >= 9) {
+            number = "";
+            totaldiv.text("Err");
+        }else if (!isNaN(number)){
+            totaldiv.text(number);
         }
     };
     var number = "";
@@ -75,7 +70,8 @@ $(document).ready(function(){
         } else if (operator === "×"){
             number = (parseFloat(newnumber, 9) * parseFloat(number,9)).toString(9);
         } else if (operator === "sqrt"){
-            number = Math.sqrt(parseFloat(number,8).toString(8));
+            number = Math.sqrt(parseFloat(number)).toString(9);
+            number = number.substring(0,8) 
         }else if  (operator === "^"){
             number = Math.pow(number,newnumber)
         }
